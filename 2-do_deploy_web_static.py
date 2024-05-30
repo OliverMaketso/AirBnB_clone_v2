@@ -7,7 +7,7 @@ from fabric.api import local, env, run, put
 from datetime import datetime
 from os.path import exists
 
-env.hosts = ['100.26.243.157', '54.174.86.201']
+env.hosts = ['52.205.83.252', '54.174.86.201']
 
 
 def do_pack():
@@ -52,7 +52,7 @@ def do_deploy(archive_path):
         # Create a new Symbolic link, linked to the new version of your code
         run('ln -s {} /data/web_static/current'.format(
             serv_path))
-        # ReturN  True if all operations have been done correctly
+        # Return True if all operations have been done correctly
         return True
     else:
         return False
