@@ -10,5 +10,5 @@ if STORAGE == "db":
     storage = DBStorage()
     storage.reload()
 else:
-    storage = Filestorage()
+    storage = FileStorage()
     storage.reload()

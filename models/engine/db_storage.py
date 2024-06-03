@@ -11,7 +11,7 @@ from models.user import User
 from models.place import Place
 from models.state import State
 from models.city import City
-from models.amenity import amenity
+from models.amenity import Amenity
 from models.review import Review
 
 
@@ -29,7 +29,14 @@ class DBStorage:
         HOST = getenv('HBNB_MYSQL_HOST')
         DB = getenv('HBNB_MYSQL_DB')
         ENV = getenv('HBNB_ENV')
-        self.engine = create_engine('mysql+mysqldb://{}:{}@{}/{}'.format(
+
+        print("USER:", USER)
+        print("PASSWORD:", PASSWORD)
+        print("HOST:", HOST)
+        print("DB:", DB)
+        print("ENV:", ENV)
+        
+        self.__engine = create_engine('mysql+mysqldb://{}:{}@{}/{}'.format(
             USER,
             PASSWORD,
             HOST,
@@ -69,7 +76,8 @@ class DBStorage:
     def delete(self, obj=None):
         """ delete from the current database session obj if not None
         """
-        self.__session.delete(obj)
+        if obj is not None:
+            self.__session.delete(obj)
 
     def reload(self):
         """Creates all tables in the database
@@ -79,8 +87,6 @@ class DBStorage:
                 expire_on_commit=False)
         self.__session = scoped_session(
                 session_factory)
-
-
-   
-
-
+    def close(self):
+        """call remove() method on the private session attribute (self.__session)"""
+        self.__session.remove()

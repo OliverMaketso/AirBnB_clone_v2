@@ -6,6 +6,7 @@ import sqlalchemy
 from sqlalchemy.orm import declarative_base
 from sqlalchemy import Column, Integer,String,DateTime
 from os import getenv
+import models
 
 STORAGE = getenv("HBNB_TYPE_STORAGE")
 
@@ -16,7 +17,7 @@ else:
 
 class BaseModel:
     """A base class for all hbnb models"""
-    id = Column(String(60), unique=True, nullable=False)
+    id = Column(String(60), primary_key=True, unique=True, nullable=False)
     created_at = Column(DateTime, default=datetime.utcnow(), nullable=False)
     updated_at = Column(DateTime, default=datetime.utcnow(), nullable=False)
 
@@ -70,7 +71,4 @@ class BaseModel:
     def delete(self):
         """deletes the current instance from the storage (models.storage) by calling the method delete
         """
-
-        from models import storage
-        storage.delete(self)
-
+        models.storage.delete(self)
