@@ -67,3 +67,4 @@ def deploy():
         value = archive.__dict__["command"].split(" ")[-2]
         print(value)
         return do_deploy(value)
+ss
