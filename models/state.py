@@ -15,7 +15,7 @@ class State(BaseModel, Base):
     if STORAGE == "db":
         name = Column(String(128), nullable=False)
         cities = relationship(
-            'City', backref='states')
+            'City', backref='state', cascade="all, delete")
     else:
         name = ""
 
