@@ -4,20 +4,23 @@ from flask import Flask
 
 app = Flask(__name__)
 
+
 @app.route("/", strict_slashes=False)
 def Hello_HBNB():
     """returns Hello HBNB!"""
     return "Hello HBNB!"
+
 
 @app.route("/hbnb", strict_slashes=False)
 def hbnb():
     """returns HBNB"""
     return "HBNB"
 
+
 @app.route("/c/<text>", strict_slashes=False)
 def c_text(text):
     """returns c followed by the value of text variable"""
-    text = text.replace('_',' ')
+    text = text.replace('_', ' ')
     return "C %s" % text
 
 
