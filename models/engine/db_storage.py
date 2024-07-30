@@ -22,19 +22,22 @@ class DBStorage:
     __session = None
 
     def __init__(self):
-        """initialization
         """
+        initialization
+        """
+        
         USER = getenv('HBNB_MYSQL_USER')
         PASSWORD = getenv('HBNB_MYSQL_PWD')
         HOST = getenv('HBNB_MYSQL_HOST')
         DB = getenv('HBNB_MYSQL_DB')
         ENV = getenv('HBNB_ENV')
+        
 
-        print("USER:", USER)
+        """print("USER:", USER)
         print("PASSWORD:", PASSWORD)
         print("HOST:", HOST)
         print("DB:", DB)
-        print("ENV:", ENV)
+        print("ENV:", ENV)"""
         
         self.__engine = create_engine('mysql+mysqldb://{}:{}@{}/{}'.format(
             USER,
