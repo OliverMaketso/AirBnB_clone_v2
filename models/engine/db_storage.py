@@ -25,25 +25,23 @@ class DBStorage:
         """
         initialization
         """
-        
         USER = getenv('HBNB_MYSQL_USER')
         PASSWORD = getenv('HBNB_MYSQL_PWD')
         HOST = getenv('HBNB_MYSQL_HOST')
         DB = getenv('HBNB_MYSQL_DB')
         ENV = getenv('HBNB_ENV')
-        
 
         """print("USER:", USER)
         print("PASSWORD:", PASSWORD)
         print("HOST:", HOST)
         print("DB:", DB)
         print("ENV:", ENV)"""
-        
+
         self.__engine = create_engine('mysql+mysqldb://{}:{}@{}/{}'.format(
             USER,
             PASSWORD,
             HOST,
-            DB),pool_pre_ping=True)
+            DB), pool_pre_ping=True)
         if ENV == "test":
             Base.metadata.drop_all(self.__engine)
 
@@ -63,7 +61,7 @@ class DBStorage:
             for clase, value in classes.items():
                 objects = self.__session.query(value).all()
                 for obj in objects:
-                     show[obj.to_dict()['__class__'] + '.' + obj.id] = obj
+                    show[obj.to_dict()['__class__'] + '.' + obj.id] = obj
         return show
 
     def new(self, obj):
@@ -87,9 +85,13 @@ class DBStorage:
         """
         Base.metadata.create_all(self.__engine)
         session_factory = sessionmaker(bind=self.__engine,
-                expire_on_commit=False)
+                                       expire_on_commit=False)
         self.__session = scoped_session(
                 session_factory)
+
     def close(self):
-        """call remove() method on the private session attribute (self.__session)"""
+        """
+        call remove() method on the
+        private session attribute (self.__session)
+        """
         self.__session.remove()
